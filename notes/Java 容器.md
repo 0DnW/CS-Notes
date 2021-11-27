@@ -527,7 +527,7 @@ public V put(K key, V value) {
     // 先找出是否已经存在键为 key 的键值对，如果存在的话就更新这个键值对的值为 value
     for (Entry<K,V> e = table[i]; e != null; e = e.next) {
         Object k;
-        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) { //先判断e.hash==hash 避免进行key.equals(k)判断做了点优化https://stackoverflow.com/questions/36100482/why-does-hashmap-put-both-compare-hashes-and-test-equality
             V oldValue = e.value;
             e.value = value;
             e.recordAccess(this);
